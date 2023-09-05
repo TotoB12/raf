@@ -15,7 +15,7 @@ function send(channel, message) {
         "Content-Type": "application/json",
         "Authorization": token
       },
-      body: JSON.stringify({ "content": `${message}\n\n*I am Slaycraft and I approve of this message.*` })
+      body: JSON.stringify({ "content": `${message}\n\n||*I am Slaycraft and I approve of this message.*||` })
     }, function(err, res, body) {
       console.log(err)
       console.log(body)
@@ -27,7 +27,7 @@ app.post('/send', (req, res) => {
   const message = req.body.message;
   const fs = require('fs');
 
-  fs.appendFile('log.txt', `${message}\n`, function (err) {
+  fs.appendFile('log.txt', `\`\`\`\n${message}\n\`\`\`\n\n`, function (err) {
   if (err) throw err;
   console.log('Saved!');
   });
