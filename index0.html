@@ -48,7 +48,6 @@ form {
     <h5>Radical Anti Fascist</h5>
     <p>A <a href='https://totob12.com' target='_blank' style="color: #1e90ff;">totob12.com</a> creation</p>
     
-    <!-- Add a div element to display the success message -->
     <div id="success" class="alert alert-success" style="display:none;">
       Message successfully sent
     </div>
@@ -56,16 +55,13 @@ form {
     <form action="/send" method="post" class="p-4 rounded shadow">
       <label for="name">Channel:</label>
       <select name="channel" id="channel" class="form-control">
-        <!-- Add a value attribute to the default option -->
         <option value="" selected disabled hidden>Choose</option>
         <!-- <option value="1132264639049252894">Genshin</option> -->
         <option value="1055241483952853065">Raf</option>
       </select>
       <label for="message">Message:</label>
       <textarea id="message" name="message" class="form-control" rows=6 style='resize: none;' oninput='updateCharCount()'></textarea><br>
-      <!-- Add an element to display the character count -->
       <p><span id='charCount'>0</span>/2000</p>
-      <!-- Add an onclick attribute to the submit button to call a JavaScript function -->
       <input type="submit" value="Submit" class="btn btn-primary" onclick="submitForm(event)">
     </form>
     
@@ -88,52 +84,37 @@ console.log(`
                  
 `);
 
-// Define a JavaScript function to validate and submit the form
 function submitForm(event) {
-  // Prevent the default form submission behavior
   event.preventDefault();
   
-  // Get the channel and message values from the form
   var channel = document.getElementById("channel").value;
   var message = document.getElementById("message").value;
 
-  // Check if the channel is not empty and the message is not longer than 500 characters
   if (channel && message.length <= 2000) {
-    // Send an AJAX request to the server with the form data
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "/send", true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhr.send("channel="+channel+"&message="+message);
 
-    // Show the success message for one second
     var success = document.getElementById("success");
     success.style.display = "block";
     setTimeout(function() {
       success.style.display = "none";
     },1000);
 
-    // Clear the form fields
-    document.getElementById("channel").value = "";
     document.getElementById("message").value = "";
     
-    // Update the character count
     updateCharCount();
     
   } else {
-    // Alert the user if the channel is empty or the message is too long
     alert("Please select a channel and enter a message no longer than 500 characters.");
   }
 }
 
-// Define a JavaScript function to update the character count
 function updateCharCount() {
-  // Get the message value from the form
   var message = document.getElementById("message").value;
-  
-  // Count the number of characters in the message
   var charCount = message.length;
   
-  // Update the character count element
   document.getElementById("charCount").textContent = charCount;
 }
 </script>
