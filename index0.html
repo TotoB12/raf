@@ -56,12 +56,13 @@ form {
       <label for="name">Channel:</label>
       <select name="channel" id="channel" class="form-control">
         <option value="" selected disabled hidden>Choose</option>
-        <!-- <option value="1132264639049252894">Genshin</option> -->
+        <option value="1132264639049252894">Genshin</option>
         <option value="1055241483952853065">Raf</option>
+        <!-- <option value="1076867713256923277">o</option> -->
       </select>
       <label for="message">Message:</label>
       <textarea id="message" name="message" class="form-control" rows=6 style='resize: none;' oninput='updateCharCount()'></textarea><br>
-      <p><span id='charCount'>0</span>/2000</p>
+      <p><span id='charCount'>0</span>/1999</p>
       <input type="submit" value="Submit" class="btn btn-primary" onclick="submitForm(event)">
     </form>
     
@@ -90,7 +91,7 @@ function submitForm(event) {
   var channel = document.getElementById("channel").value;
   var message = document.getElementById("message").value;
 
-  if (channel && message.length <= 2000) {
+  if (channel && message.length < 2000) {
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "/send", true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -107,7 +108,7 @@ function submitForm(event) {
     updateCharCount();
     
   } else {
-    alert("Please select a channel and enter a message no longer than 500 characters.");
+    alert("Please select a channel and enter a message no longer than 2000 characters.");
   }
 }
 
